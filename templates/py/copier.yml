@@ -1,0 +1,37 @@
+_templates_suffix: .jinja
+_subdirectory: template
+_tasks:
+  - "uv add --dev pytest ruff ty pdoc"
+  - "just check"
+  - command: "git init && git add --all && git commit -m 'Initial commit'"
+    when: "{{ git_init }}"
+
+project_name:
+  type: str
+  help: What is your project name?
+  validator: "{% if project_name == '' %}Project name cannot be empty!{% endif %}"
+
+project_slug:
+  type: str
+  help: Python package name (will be auto-generated from project name if not provided)
+  default: "{{ project_name | lower | replace('-', '_') | replace(' ', '_') }}"
+
+description:
+  type: str
+  help: Project description
+  default: TODO
+
+python_version:
+  type: str
+  help: Python version
+  default: "3.13"
+
+create_cli:
+  type: bool
+  help: Create CLI?
+  default: true
+
+git_init:
+  type: bool
+  help: Initialize git repository
+  default: true
