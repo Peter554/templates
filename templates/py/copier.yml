@@ -1,7 +1,7 @@
 _templates_suffix: .jinja
 _subdirectory: template
 _tasks:
-  - "uv add --dev pytest ruff ty pdoc"
+  - "uv add --dev pytest ruff ty pdoc deptry"
   - "just check"
   - command: "git init && git add --all && git commit -m 'Initial commit'"
     when: "{{ git_init }}"
